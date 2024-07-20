@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記録-推し活ポートフォリオ</title>
+</head>
+<body>
+    <div>
+      <main>
+        <div>
+          <form action="/record" enctype="multipart/form-data" method="post">
+            <div>
+              <div>
+                <label for="name">買った</label>
+                <input id="name" type="text" name="name" placeholder="" required>
+                </input>
+              </div>
+              <div>
+                <label for="image">写真</label>
+                <input id="image" type="file" name="image" accept="image/*">
+                </input>
+                <!--<label for="image">ファイルを選択</label>-->
+              </div>
+            </div>
+            <div>
+              <div>
+                <label for="price">プライス</label>
+                <input id="price" type="number" name="price" placeholder="￥" required>
+                </input>
+              </div>
+              <div>
+                <label for="category">カテゴリ</label>
+                <input id="category" type="text" name="category" placeholder="例) アクリルスタンド" required>
+                </input>
+              </div>
+              <div>
+                <label for="genre">ジャンル</label>
+                <input id="genre" type="text" name="genre" placeholder="例) 山田一郎 ," required>
+                </input>
+              </div>
+              <input type="submit" value="記録する!">
+              </input>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+</body>
+</html>

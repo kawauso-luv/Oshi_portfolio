@@ -253,3 +253,14 @@ footer a {
 }
 
 /*-----------------*/
+
+/*-----------------*/
+.item-container {
+  width: 89vw;
+  margin: 4.7vw auto 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  column-gap: 3.1vw;
+  row-gap: 4.1vw;
+}
