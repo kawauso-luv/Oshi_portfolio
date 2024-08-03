@@ -90,6 +90,19 @@ input {
   width: 100%;
 }
 
+/*-----------------*/
+.item-container {
+  width: 98vw;
+  margin: 4.7vw auto 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  column-gap: 3.1vw;
+  row-gap: 4.1vw;
+}
+/*--------*/
+
+
 .container {
   background-color: #fff;
   border-radius: 10px;
@@ -253,14 +266,3 @@ footer a {
 }
 
 /*-----------------*/
-
-/*-----------------*/
-.item-container {
-  width: 89vw;
-  margin: 4.7vw auto 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  column-gap: 3.1vw;
-  row-gap: 4.1vw;
-}

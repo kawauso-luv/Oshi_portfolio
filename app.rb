@@ -46,9 +46,6 @@ end
 
 post '/signin' do
     user = User.find_by(email: params[:email])
-    p "========"
-    p user.name
-    p "========"
     if user && user.authenticate(params[:password])
         session[:user] = user.id
     end
@@ -65,13 +62,38 @@ get '/record' do
     erb :record
 end
 
-get '/:id' do
-     @items = Item.all
-    p "==========="
-    p @items
-    erb :mypage
+get '/newpost' do
+    erb :post
 end
 
+post '/newpost' do
+    if params[:upload_photo]
+        image = params[:upload_photo]
+        tempfile = image[:tempfile]
+        upload = Cloudinary::Uploader.upload(tempfile.path)
+        img_url = upload['url']
+    else
+        img_url = null
+    end  
+    post = Post.create(
+        image_url: img_url,
+        user_name: current_user.name,
+        content: params[:content],
+        tags: params[:tags],
+        like: 0
+    )
+    redirect "/#{session[:user]}"
+end
+
+get '/timeline' do
+    @posts = Post.order(created_at: :desc)
+    erb :timeline
+end
+
+get '/:id' do
+    @items = Item.all
+    erb :mypage
+end
 
 post '/record' do
     # params[:image]が空の場合の対処
