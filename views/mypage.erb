@@ -13,6 +13,18 @@
     <h1>ログインできたよ</h1>
     <p>ようこそ<%= current_user.name %></p>
     <a href="/record">推し活を記録しよう</a>
+    <div>
+    ポートフォリオをつくるジャンルの選択
+    <form action="/newportfolio" method="post">
+        <select name="genre">
+          <option value="">どのジャンルのポートフォリオをつくりますか</option>
+          <% @genre.each do |genre| %>
+            <option value="<%= genre %>"><%= genre %></option>
+          <% end %>
+        </select>
+        <button type="submit" >ポートフォリオをつくる</button>
+    </form>
+    </div>
     <div class="item-container">
         <h3>最近購入</h3><br>
         <% if @items.nil?%>

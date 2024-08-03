@@ -62,6 +62,27 @@ get '/record' do
     erb :record
 end
 
+post '/record' do
+    # params[:image]が空の場合の対処
+    img_url = "/img/null_item.jpg"
+    if params[:image]
+        image = params[:image]
+        p image
+        tempfile = image[:tempfile]
+        upload = Cloudinary::Uploader.upload(tempfile.path)
+        img_url = upload['url']
+    end
+    # 商品の追加
+    item = Item.create(
+        name: params[:name],
+        image_url: img_url,
+        price: params[:price].to_i,
+        category: params[:category],
+        genre: params[:genre])
+  
+  redirect "/#{session[:user]}"
+end
+
 get '/newpost' do
     erb :post
 end
@@ -90,28 +111,38 @@ get '/timeline' do
     erb :timeline
 end
 
-get '/:id' do
+post '/newportfolio' do
+    @genre_of_portfolio = params[:genre]
+    
     @items = Item.all
-    erb :mypage
+    @genre = @items.map{|item| item.genre}.uniq
+    @sum = @items.sum(:price)
+    
+    @genre.each do |genre|
+        percent = @genre.map{|genre| @items.where(genre: genre).sum(:price).to_f / @sum.to_f * 100.round(2)}
+        @percentages = []
+        @percentages.push(percent)
+    end
+    erb:newportfolio
+end    
+
+
+post '/makeportfolio' do
+    Portfolio.create(
+        user: session[:user],
+        genre: @genre,
+        content: params[:content],
+        tags: params[:tags],
+    )
+    redirect "/portfolio/#{portfolio.id}"
 end
 
-post '/record' do
-    # params[:image]が空の場合の対処
-    img_url = "/img/null_item.jpg"
-    if params[:image]
-        image = params[:image]
-        p image
-        tempfile = image[:tempfile]
-        upload = Cloudinary::Uploader.upload(tempfile.path)
-        img_url = upload['url']
-    end
-    # 商品の追加
-    item = Item.create(
-        name: params[:name],
-        image_url: img_url,
-        price: params[:price].to_i,
-        category: params[:category],
-        genre: params[:genre])
-  
-  redirect "/#{session[:user]}"
+get '/portfolio/:id' do
+    erb:portfoliodayo
+end
+
+get '/:id' do
+    @items = Item.all
+    @genre = @items.map{|item| item.genre}.uniq
+    erb :mypage
 end

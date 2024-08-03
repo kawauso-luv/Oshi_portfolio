@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規ポートフォリオ</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/chart.css">
+</head>
+<body>
+    画像選ぶ<br>
+    投稿選ぶ<br>
+    色選ぶ<br>
+    円グラフ
+    
+    <div>
+        <p class="sum">総額</p>
+        <p class="totalcolor sum">￥<%=@sum%></p>
+        <% if @genre.empty?%>
+            <p>まだ登録されていないよ</p>
+        <% else %>
+            <div class="size">
+                <canvas id="myChart" class="size"></canvas>
+            </div>    
+        <% end %>
+    </div>
+    <form action="/makeportfolio" enctype="multipart/form-data" method="post">
+        <button type="submit" id="portfolio">ポートフォリオをつくる！</button>
+    </form>
+</body>
+<script>
+    // チャート
+    var ctx = document.getElementById('myChart').getContext('2d');
+    const plugin = {
+      id: 'customCanvasBackgroundColor',
+      beforeDraw: (chart, args, options) => {
+        const {ctx} = chart;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = options.color || '#99ffff';
+        ctx.fillRect(0, 0, chart.width, chart.height);
+        ctx.restore();
+      }
+    };
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                <%unless @genre.length==0%>
+                <%=@genre.map{|genre| "'"+genre+"'"}.join(' , ')%>
+                <%end%>
+                ],
+            datasets: [{
+                data: [
+                    <%unless @genre.length==0%>
+                        <%= @percentages.join(' , ') %>
+                    <%end%>
+                    ],
+                label: '%',
+                backgroundColor: [
+                    'rgba(229, 99, 153, 0.2)',
+                    'rgba(34, 116, 165, 0.2)',
+                    'rgba(81, 152, 114, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(229, 99, 153, 1)',
+                    'rgba(34, 116, 165, 1)',
+                    'rgba(81, 152, 114, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            tooltips: {
+                
+            },
+            plugins: {
+                customCanvasBackgroundColor: {
+                    color: '#fff',
+                }
+            }
+        },
+        plugins: [plugin]
+    });
+</script>
+</html>
