@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
     create_table :posts do |t|
       t.string :image_url
       t.string :user_name
-      t.text :tags
+      t.text :genre
       t.text :content
       t.integer :like
       t.timestamps null: false

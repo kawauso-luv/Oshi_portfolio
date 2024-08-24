@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/portfolio.css">
+    <title>Oshi Portfolio</title>
+</head>
+<body>
+    <div class="container">
+        <div class="chart-container">
+            <canvas id="oshikatsuChart" class="chart"></canvas>
+            <div class="chart-label">#私の<br>推し活<br>ポートフォリオ</div>
+        </div>
+        <div class="speech-bubble">
+            推し活総額の38%<br>雫さんに費やしました
+        </div>
+        <div class="photo-gallery">
+            <div class="photo-container back" id="photo2">
+                <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="photo2">
+            </div>
+            <div class="photo-container" id="photo1">
+                <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="photo1">
+            </div>
+            <button class="arrow left" onclick="prevPhoto()">&#10094;</button>
+            <button class="arrow right" onclick="nextPhoto()">&#10095;</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const oshiName = "雫さん";
+        const oshiPercentage = 38;
+        const totalSpend = 1000; // Replace with database value
+
+        // Pie Chart Setup
+        const ctx = document.getElementById('oshikatsuChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [`${oshiName}`, 'Others'],
+                datasets: [{
+                    label: 'Oshikatsu Portfolio',
+                    data: [oshiPercentage, 100 - oshiPercentage],
+                    backgroundColor: ['#00CFFF', '#E0E0E0']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+            }
+        });
+
+        // 写真ギャラリーのスクリプト
+        let currentPhoto = 0;
+        const photos = document.querySelectorAll('.photo-container');
+
+        function showPhoto(index) {
+            photos.forEach((photo, i) => {
+                if (i === index) {
+                    photo.classList.remove('back');
+                    photo.style.zIndex = 1;
+                    photo.style.transform = "scale(1) rotate(0)";
+                } else {
+                    photo.classList.add('back');
+                    photo.style.zIndex = 0;
+                    photo.style.transform = "scale(0.9) rotate(-10deg)";
+                }
+            });
+        }
+
+        function prevPhoto() {
+            currentPhoto = (currentPhoto > 0) ? currentPhoto - 1 : photos.length - 1;
+            showPhoto(currentPhoto);
+        }
+
+        function nextPhoto() {
+            currentPhoto = (currentPhoto < photos.length - 1) ? currentPhoto + 1 : 0;
+            showPhoto(currentPhoto);
+        }
+        
+         // Set the speech bubble color
+         // User-specified color for the speech bubble
+        const userColor = <% @user_color %></>; // ここにuser_colorの値を設定
+        
+        // Set the speech bubble color
+        const speechBubble = document.getElementById('speechBubble');
+        speechBubble.style.backgroundColor = userColor;
+        speechBubble.style.setProperty('--bubble-color', userColor);
+    </script>
+</body>
+</html>

@@ -100,7 +100,7 @@ post '/newpost' do
         image_url: img_url,
         user_name: current_user.name,
         content: params[:content],
-        tags: params[:tags],
+        category: params[:category],
         like: 0
     )
     redirect "/#{session[:user]}"
@@ -115,29 +115,33 @@ post '/newportfolio' do
     @genre_of_portfolio = params[:genre]
     
     @items = Item.all
-    @genre = @items.map{|item| item.genre}.uniq
-    @sum = @items.sum(:price)
+    @genre = @items.where(genre: @genre_of_portfolio)
     
-    @genre.each do |genre|
-        percent = @genre.map{|genre| @items.where(genre: genre).sum(:price).to_f / @sum.to_f * 100.round(2)}
-        @percentages = []
-        @percentages.push(percent)
-    end
+    total_price = @items.sum(:price)
+    @genre_price = @genre.sum(:price)
+    
+    @genre_parcent = @genre_price.to_f / @sum.to_f * 100.round(1)
+    
     erb:newportfolio
 end    
 
 
 post '/makeportfolio' do
-    Portfolio.create(
+    portfolio = Portfolio.create(
         user: session[:user],
         genre: @genre,
-        content: params[:content],
-        tags: params[:tags],
+        total_price: @sum,
+        genre_price: @sum,
+        user_color: params[:color],
+        item_id: @id,
+        post_id: @id
     )
+    session[:portfolio_data] = portfolio
     redirect "/portfolio/#{portfolio.id}"
 end
 
 get '/portfolio/:id' do
+    @portfolio = session.delete(:portfolio_data) || Portfolio.find(params[:id])
     erb:portfoliodayo
 end
 

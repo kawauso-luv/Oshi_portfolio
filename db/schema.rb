@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2024_08_03_085139) do
   create_table "posts", force: :cascade do |t|
     t.string "image_url"
     t.string "user_name"
-    t.text "tags"
+    t.text "genre"
     t.text "content"
     t.integer "like"
     t.datetime "created_at", precision: 6, null: false
