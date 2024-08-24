@@ -1,0 +1,118 @@
+button {
+  border-radius: 20px;
+  border: 1px solid #ff809d;
+  background-color: #ff809d;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: #FFFFFF;
+}
+
+
+
+/* 全体の背景とフォント */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f2f5, #d9e2ef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* メインコンテナ */
+.container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+/* Flexboxを使用して画像を並べる */
+.image-flex {
+    display: flex;
+    flex-wrap: wrap; /* 複数行に折り返す */
+    gap: 15px; /* アイテム間のスペース */
+    justify-content: center; /* 中央に配置 */
+}
+
+/* 画像アイテム */
+.image-item {
+    cursor: pointer;
+    flex: 1 1 200px; /* 基本幅を200px、拡縮に対応 */
+    max-width: 200px; /* 最大幅を200px */
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* 画像 */
+.image-item img {
+    width: 100%;
+    height: 150px; /* 高さを指定して統一 */
+    object-fit: cover; /* 画像を枠に合わせてトリミング */
+    border-radius: 15px;
+}
+
+/* アイテムのテキスト */
+.image-item p {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    transition: color 0.3s;
+}
+
+/* ホバー時のスタイル */
+.image-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 選択状態のスタイル */
+.image-item.selected {
+    border: 4px solid #4CAF50;
+    transform: scale(1.1);
+}
+
+.image-item.selected img {
+    transform: scale(1.1);
+}
+
+.image-item.selected p {
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+/* メディアクエリ */
+@media (max-width: 900px) {
+    .image-item {
+        max-width: 150px; /* タブレットサイズの最大幅 */
+    }
+}
+
+@media (max-width: 600px) {
+    .image-item {
+        max-width: 100px; /* スマートフォンサイズの最大幅 */
+    }
+}

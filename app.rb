@@ -127,17 +127,20 @@ end
 
 
 post '/makeportfolio' do
-    portfolio = Portfolio.create(
-        user: session[:user],
-        genre: @genre,
-        total_price: @sum,
-        genre_price: @sum,
-        user_color: params[:color],
-        item_id: @id,
-        post_id: @id
-    )
-    session[:portfolio_data] = portfolio
-    redirect "/portfolio/#{portfolio.id}"
+    # portfolio = Portfolio.create(
+    #     user: session[:user],
+    #     genre: @genre,
+    #     total_price: @sum,
+    #     genre_price: @sum,
+    #     item_id: @id,
+    #     post_id: @id
+    # )
+    p params[:color]
+    p params[:selected_image1]
+    p params[:selected_image2]
+
+    # session[:portfolio_data] = portfolio
+    # redirect "/portfolio/#{portfolio.id}"
 end
 
 get '/portfolio/:id' do

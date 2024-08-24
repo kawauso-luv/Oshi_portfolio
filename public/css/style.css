@@ -47,8 +47,8 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid #FF4B2B;
-  background-color: #FF4B2B;
+  border: 1px solid #ff809d;
+  background-color: #ff809d;
   color: #FFFFFF;
   font-size: 12px;
   font-weight: bold;
@@ -90,18 +90,7 @@ input {
   width: 100%;
 }
 
-/*-----------------*/
-.item-container {
-  width: 98vw;
-  margin: 4.7vw auto 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  column-gap: 3.1vw;
-  row-gap: 4.1vw;
-}
-/*--------*/
-
+/*----------ログイン-------*/
 
 .container {
   background-color: #fff;
@@ -174,9 +163,9 @@ input {
 }
 
 .overlay {
-  background: #FF416C;
-  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  background: #ff809d;
+  background: -webkit-linear-gradient(to right, #ffc480, #ff809d);
+  background: linear-gradient(to right, #ffc480, #ff809d);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

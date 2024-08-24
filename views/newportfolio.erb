@@ -4,18 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規ポートフォリオ</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="/css/chart.css">
+    <link rel="stylesheet" href="/css/newportfolio.css">
 </head>
 <body>
-    画像選ぶ<br>
-    投稿選ぶ<br>
-    色選ぶ<br>
-    円グラフ
-    <input type="color" value="#ffffff">
-    <button id="button">決定</button>
-    <form action="/makeportfolio" enctype="multipart/form-data" method="post">
-        <button type="submit" id="portfolio">ポートフォリオをつくる！</button>
-    </form>
-</body>
+    <div class="container">
+        <form action="/makeportfolio" method="post">
+            <!-- Top Section -->
+            <div class="header">
+                <div class="color-picker">
+                    <label for="color">推しカラーを選択<br></label>
+                    <input type="color" name="color" value="#000000">
+                </div><br>
+                <button class="start-btn">ポートフォリオ作成！</button>
+            </div>
+            <div class="instructions">
+                <p>表示する写真を2枚選択</p>
+            </div>
+            <div class="image-flex">
+                <% if @items.nil? %>
+                    <p>ここには何もないよ</p>
+                <% else %>
+                    <% @items.each do |item| %>
+                        <div class="image-item" data-value="<%= item.id %>">
+                            <a href="#">
+                                <img src="<%= item.image_url %>" alt="<%= item.name %>">
+                                <p><%= item.name %></p>
+                                <p>#<%= item.category %></p>
+                                <p class="item-price"><%= item.price %></p>
+                            </a>
+                        </div>
+                    <% end %>
+                <% end %>
+
+                <!-- Hidden Inputs for Selected Images -->
+                <input type="hidden" name="selected_image1" id="selected_image1">
+                <input type="hidden" name="selected_image2" id="selected_image2">
+            </form>
+        </div>
+        <script>
+            document.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                if (item.classList.contains('selected')) {
+                    item.classList.remove('selected');
+                    if (selectedImage1.value === item.getAttribute('data-value')) {
+                        selectedImage1.value = '';
+                    } else if (selectedImage2.value === item.getAttribute('data-value')) {
+                        selectedImage2.value = '';
+                    }
+                } else if (document.querySelectorAll('.selected').length < 2) {
+                    item.classList.add('selected');
+                    if (!selectedImage1.value) {
+                        selectedImage1.value = item.getAttribute('data-value');
+                    } else if (!selectedImage2.value) {
+                        selectedImage2.value = item.getAttribute('data-value');
+                    }
+                } else {
+                    alert('You can only select 2 images.');
+                }
+            });
+        });
+
+        </script>
+    </body>
 </html>
