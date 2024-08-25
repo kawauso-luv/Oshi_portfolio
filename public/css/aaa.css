@@ -8,6 +8,37 @@ body {
     height: 100vh;
 }
 
+/*ボタン*/
+.btn {
+    padding: 10px 20px;
+    background-color: #ff809d;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ff4d76;
+}
+
+
+p, .p {
+    color: #666;
+    font-size: 1em;
+    margin-top: 30px;
+}
+
+
+h1 {
+    color:#ff4d76;
+    font-size: 2em;
+    margin: 0;
+}
+
 /* メインコンテナ */
 .container {
     background: #ffffff;
@@ -88,3 +119,5 @@ body {
         max-width: 100px; /* スマートフォンサイズの最大幅 */
     }
 }
+
+

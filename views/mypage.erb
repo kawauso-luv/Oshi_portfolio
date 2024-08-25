@@ -1,50 +1,59 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!--<link rel="stylesheet" href="/css/style.css">-->
-    <title>Mypage-推し活ポートフォリオ</title>
+    <title>マイページ - 推し活ポートフォリオ</title>
+    <link rel="stylesheet" href="/css/mypage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form action="/signout" method="post">
-        <button>ログアウト</button>
-    </form>
-    <h1>ログインできたよ</h1>
-    <p>ようこそ<%= current_user.name %></p>
-    <a href="/record">推し活を記録しよう</a>
-    <div>
-    ポートフォリオをつくるジャンルの選択
-    <form action="/newportfolio" method="post">
-        <select name="genre">
-          <option value="">どのジャンルのポートフォリオをつくりますか</option>
-          <% @genre.each do |genre| %>
-            <option value="<%= genre %>"><%= genre %></option>
-          <% end %>
-        </select>
-        <button type="submit" >ポートフォリオをつくる</button>
-    </form>
+    <div class="container">
+        <header>
+            <h1>推し活ポートフォリオ</h1>
+            <form action="/signout" method="post">
+                <button class="logout-btn">ログアウト</button>
+            </form>
+        </header>
+        
+        <main>
+            <p class="welcome">ようこそ<%= current_user.name %>さん</p>
+            <a href="/record" class="btn record-btn">推し活を記録しよう</a>
+            
+            <div class="portfolio-section">
+                <h2>ポートフォリオをつくるジャンルの選択</h2>
+                <form action="/newportfolio" method="post" class="genre-form">
+                    <select name="genre">
+                        <option value="">どのジャンルのポートフォリオをつくりますか</option>
+                        <% @genre.each do |genre| %>
+                            <option value="<%= genre %>"><%= genre %></option>
+                        <% end %>
+                    </select>
+                    <button type="submit" class="btn">ポートフォリオをつくる</button>
+                </form>
+            </div>
+            
+            <div class="item-container">
+                <h2>最近購入</h2>
+                <% if @items.nil?%>
+                    <p>まだ登録されていないよ</p>
+                <% else %>
+                    <div class="item-grid">
+                        <% sorted_items = @items.order(created_at: :desc).limit(6) %>
+                        <% sorted_items.each do |item| %>
+                            <div class="item">
+                                <a href="#">
+                                    <img src="<%= item.image_url %>" alt="<%= item.name %>">
+                                    <p class="item-name"><%= item.name %></p>
+                                    <p class="item-category">#<%= item.category%></p>
+                                    <p class="item-price"><%= item.price %></p>
+                                </a>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+        </main>
     </div>
-    <div class="item-container">
-        <h3>最近購入</h3><br>
-        <% if @items.nil?%>
-            <p>まだ登録されていないよ</p>
-        <% else %>
-            <% sorted_items = @items.order(created_at: :desc).limit(6) %>
-            <% count = 0 %>
-            <% sorted_items.each do |item| %>
-        <div class="item">
-            <a href="#">
-                <img src="<%= item.image_url %>">
-                <p><%= item.name %></p>
-                <p>#<%= item.category%></p>
-                <p class="item-price"><%= item.price %></p>
-            </a>
-        </div>
-        <% count += 1 %>
-        <% break if count >= 6 %>
-        <% end %>
-        <% end %>
-</div>
 </body>
 </html>

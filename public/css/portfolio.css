@@ -10,6 +10,26 @@
         height: 100vh;
         margin: 0;
     }
+    
+    .btn {
+    position:fixed; /*配置設定-fixed指定で追従*/
+    z-index:1; 
+    right:120px;
+    bottom:20px;
+    padding: 12px 30px;
+    background-color: #666;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+    background-color: #ff4d76;
+    }
+    
+    
     .container {
         width: 80%;
         max-width: 1200px;

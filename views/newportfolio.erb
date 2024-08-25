@@ -9,14 +9,6 @@
 <body>
     <div class="container">
         <form action="/makeportfolio" method="post">
-            <!-- Top Section -->
-            <div class="header">
-                <div class="color-picker">
-                    <label for="color">推しカラーを選択<br></label>
-                    <input type="color" name="color" value="#000000">
-                </div><br>
-                <button class="start-btn">ポートフォリオ作成！</button>
-            </div>
             <div class="instructions">
                 <p>表示する写真を2枚選択</p>
             </div>
@@ -35,12 +27,20 @@
                         </div>
                     <% end %>
                 <% end %>
-
+                </div>
                 <!-- Hidden Inputs for Selected Images -->
                 <input type="hidden" name="selected_image1" id="selected_image1">
                 <input type="hidden" name="selected_image2" id="selected_image2">
+                <br><br>
+                <div class="header">
+                <div class="color-picker">
+                    <label for="color" class="p">推しカラーを選択<br></label>
+                    <input type="color" name="color" value="#000000">
+                </div><br>
+                <button class="btn">ポートフォリオ作成！</button>
+                </div>
             </form>
-        </div>
+        
         <script>
             document.querySelectorAll('.image-item').forEach(item => {
                 item.addEventListener('click', () => {

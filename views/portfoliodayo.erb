@@ -25,7 +25,6 @@
             <button class="arrow right">&#10095;</button>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const oshiName = "lifeistech";
@@ -114,4 +113,5 @@ prevBtn.addEventListener('click', () => {
         speechBubble.style.setProperty('--bubble-color', userColor);
     </script>
 </body>
+<a href="/<%= session[:user] %>" class="btn">もどる</a>
 </html>

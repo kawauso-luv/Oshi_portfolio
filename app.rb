@@ -141,6 +141,7 @@ post '/makeportfolio' do
 
     # session[:portfolio_data] = portfolio
     # redirect "/portfolio/#{portfolio.id}"
+    redirect '/portfolio/id'
 end
 
 get '/portfolio/id' do
