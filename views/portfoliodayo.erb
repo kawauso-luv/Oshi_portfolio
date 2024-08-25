@@ -13,23 +13,22 @@
             <div class="chart-label">#私の<br>推し活<br>ポートフォリオ</div>
         </div>
         <div class="speech-bubble">
-            推し活総額の38%<br>雫さんに費やしました
+            推し活総額の38%<br>lifeistechに費やしました
         </div>
+       
         <div class="photo-gallery">
-            <div class="photo-container back" id="photo2">
-                <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="photo2">
-            </div>
             <div class="photo-container" id="photo1">
-                <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="photo1">
+                <img src="https://res.cloudinary.com/dknmmxgco/image/upload/v1724521977/tsdyfyaytsac1ezy9kze.png" alt="photo2">
+                <img src="https://res.cloudinary.com/dknmmxgco/image/upload/v1724521950/wngf8rwz6xyy3pvlnkcq.png" alt="photo1">
             </div>
-            <button class="arrow left" onclick="prevPhoto()">&#10094;</button>
-            <button class="arrow right" onclick="nextPhoto()">&#10095;</button>
+            <button class="arrow left">&#10094;</button>
+            <button class="arrow right">&#10095;</button>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const oshiName = "雫さん";
+        const oshiName = "lifeistech";
         const oshiPercentage = 38;
         const totalSpend = 1000; // Replace with database value
 
@@ -52,37 +51,62 @@
             }
         });
 
-        // 写真ギャラリーのスクリプト
-        let currentPhoto = 0;
-        const photos = document.querySelectorAll('.photo-container');
+      // 写真ギャラリーのスクリプト
+// 画像取得
+const images = document.querySelectorAll('img');
+// キャプション取得（後日実装）
+const caption = document.querySelector('.caption');
 
-        function showPhoto(index) {
-            photos.forEach((photo, i) => {
-                if (i === index) {
-                    photo.classList.remove('back');
-                    photo.style.zIndex = 1;
-                    photo.style.transform = "scale(1) rotate(0)";
-                } else {
-                    photo.classList.add('back');
-                    photo.style.zIndex = 0;
-                    photo.style.transform = "scale(0.9) rotate(-10deg)";
-                }
-            });
-        }
+// 前に戻るボタンと次へ進むボタン要素
+const prevBtn = document.querySelector('.left');
+const nextBtn = document.querySelector('.right');
 
-        function prevPhoto() {
-            currentPhoto = (currentPhoto > 0) ? currentPhoto - 1 : photos.length - 1;
-            showPhoto(currentPhoto);
-        }
+// 画像の数を変数に格納する
+const totalImages = images.length;
 
-        function nextPhoto() {
-            currentPhoto = (currentPhoto < photos.length - 1) ? currentPhoto + 1 : 0;
-            showPhoto(currentPhoto);
-        }
+// 表示する画像を指定するための変数
+let imageIndex = 0;
+
+// 初期表示時に最初の画像のみを表示する
+images.forEach((image, index) => {
+  if (index !== imageIndex) {
+    image.style.display = 'none';
+  }
+});
+
+// 次へ
+nextBtn.addEventListener('click', () => {
+  imageIndex++;
+  if (imageIndex > totalImages - 1) {
+    imageIndex = 0;
+  }
+
+  // すべての画像を非表示にした後、表示する画像のみを表示
+  images.forEach(image => {
+    image.style.display = 'none';
+  });
+  images[imageIndex].style.display = 'block';
+  caption.innerHTML = images[imageIndex].alt;
+});
+
+// 前へ
+prevBtn.addEventListener('click', () => {
+  imageIndex--;
+  if (imageIndex < 0) {
+    imageIndex = totalImages - 1;
+  }
+
+  // すべての画像を非表示にした後、表示する画像のみを表示
+  images.forEach(image => {
+    image.style.display = 'none';
+  });
+  images[imageIndex].style.display = 'block';
+  caption.innerHTML = images[imageIndex].alt;
+});
         
          // Set the speech bubble color
          // User-specified color for the speech bubble
-        const userColor = <% @user_color %></>; // ここにuser_colorの値を設定
+        const userColor = blue;
         
         // Set the speech bubble color
         const speechBubble = document.getElementById('speechBubble');

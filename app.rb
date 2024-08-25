@@ -143,8 +143,8 @@ post '/makeportfolio' do
     # redirect "/portfolio/#{portfolio.id}"
 end
 
-get '/portfolio/:id' do
-    @portfolio = session.delete(:portfolio_data) || Portfolio.find(params[:id])
+get '/portfolio/id' do
+    #@portfolio = session.delete(:portfolio_data) || Portfolio.find(params[:id])
     erb:portfoliodayo
 end
 
