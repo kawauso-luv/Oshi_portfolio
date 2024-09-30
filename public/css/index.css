@@ -1,32 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap');
+
+
+html{
+    font-family: "Kaisei Decol", serif;
+    font-style: normal;
+    background-color: #fbf7fb;
+}
+
 .container {
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    margin-top: 60px;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     color: #ff809d;
-    font-size: 3em;
+    font-weight: 700;
+    font-size: 6em;
     margin-bottom: 20px;
+    display: flex;
 }
 
 p {
     color: #666;
+    font-weight: 400;
     font-size: 1.2em;
     margin-bottom: 30px;
 }
 
 .btn {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 18px 60px;
     background-color: #ff809d;
     color: white;
     text-decoration: none;
     border-radius: 25px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    font-size: 18px;
 }
 
 .btn:hover {

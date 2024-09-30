@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>タイムライン</title>
+    <link rel="stylesheet" href="/css/post.css" type="text/css">
 </head>
 <body>
+  <form action="/mypage/#{}" method="post">
+    <button class="logout-btn">マイページへ</button>
+  </form> 
   <div class="main-view">
     <%# 投稿がない時 %>
     <% if @posts.empty? %>
@@ -16,26 +20,24 @@
         <div class="post">
           <div class="post-header">
             <div class="post-header-data">
-              <!-- ユーザー名を表示させるコードを以下に記載 -->
+              <!-- ユーザー名を表示 -->
               <p class="post-user-name"><%= post.user_name %></p>
             </div>
           </div>
           <img src="<%= post.image_url %>" alt="投稿画像" class="post-img">
           <div class="post-content">
-            <!-- ユーザーネームを表示させるコードを以下に記載 -->
+            <!-- ユーザーネームを表示 -->
             <p class="post-user-name"><%= post.user_name %></p>
-            <!-- 本文を表示させるコードを以下に記載 -->
+            <!-- 本文を表示 -->
             <p class="post-content"><%= post.content %></p>
-            <!-- 投稿された時間を表示させるコードを以下に記載 -->
+            <!-- 投稿された時間 -->
             <p class="post-date-small"><%= post.updated_at.strftime("%Y/%m/%d") %></p>
           </div>
         </div>
       <% end %>
     <% end %>
   </div>
-<%# 非同期での post /:id/like するための設定ファイル %>
-<!--<script src="/js/asyncLike.js"></script>-->
-<%# 「続きを読む」の設定ファイル %>
-<!--<script src="/js/expandCaption.js"></script>-->
+ <a href="/newpost">投稿</a> 
+
 </body>
 </html>

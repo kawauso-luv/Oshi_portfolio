@@ -11,9 +11,13 @@
     <div class="container">
         <header>
             <h1>推し活ポートフォリオ</h1>
+            <form action="/timeline" method="get">
+                <button class="logout-btn">SNSで語ろう！</button>
+            </form>
             <form action="/signout" method="post">
                 <button class="logout-btn">ログアウト</button>
             </form>
+            
         </header>
         
         <main>
@@ -35,23 +39,47 @@
             
             <div class="item-container">
                 <h2>最近購入</h2>
-                <% if @items.nil?%>
-                    <p>まだ登録されていないよ</p>
+                <% if @items.empty?%>
+                    <p>まだ登録されていません</p>
                 <% else %>
                     <div class="item-grid">
-                        <% sorted_items = @items.order(created_at: :desc).limit(6) %>
+                        <% sorted_items = @items.order(created_at: :desc).limit(5) %>
                         <% sorted_items.each do |item| %>
                             <div class="item">
                                 <a href="#">
                                     <img src="<%= item.image_url %>" alt="<%= item.name %>">
                                     <p class="item-name"><%= item.name %></p>
                                     <p class="item-category">#<%= item.category%></p>
-                                    <p class="item-price"><%= item.price %></p>
+                                    <p class="item-price">¥<%= item.price %></p>
+                                </a>
+                            </div>
+                        <% end %>
+                    </div>
+                    <form action="/allitems" method="get">
+                        <button class="logout-btn margin">すべて見る</button>
+                    </form>
+                <% end %>
+                
+            </div>
+            
+            <div class="item-container">
+                <h2>作成したポートフォリオ</h2>
+                <% if @portfolios.empty?%>
+                    <p>まだ作成されていません</p>
+                <% else %>
+                    <div class="item-grid">
+                        <% sorted_portfolios = @portfolios %>
+                        <% sorted_portfolios.each do |portfolio| %>
+                            <div class="item">
+                                <a href="/portfolio/<%= portfolio.id %>">
+                                    <p class="item-name"><%= portfolio.genre %></p>
+                                    <p class="item-price" color="<% portfolio.color %>"><%= portfolio.color %></p>
                                 </a>
                             </div>
                         <% end %>
                     </div>
                 <% end %>
+                
             </div>
         </main>
     </div>

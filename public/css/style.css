@@ -1,18 +1,21 @@
 /*---------------*/
 /*トップページ；navigation*/
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+/*@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');*/
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: #f6f5f7;
+  background: #fbf7fb;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Kaisei Decol", serif;
+  font-weight: 500;
+  font-style: normal;
   height: 100vh;
   margin: -20px 0 50px;
 }
@@ -46,6 +49,9 @@ a {
 }
 
 button {
+  font-family: "Kaisei Decol", serif;
+  font-weight: 500;
+  font-style: normal;
   border-radius: 20px;
   border: 1px solid #ff809d;
   background-color: #ff809d;
@@ -83,6 +89,9 @@ form {
 }
 
 input {
+  font-family: "Kaisei Decol", serif;
+  font-weight: 500;
+  font-style: normal;
   background-color: #eee;
   border: none;
   padding: 12px 15px;

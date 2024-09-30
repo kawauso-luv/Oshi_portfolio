@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/portfolio.css">
-    <title>Oshi Portfolio</title>
+    <title>あなたのポートフォリオ</title>
 </head>
 <body>
     <div class="container">
@@ -12,24 +12,23 @@
             <canvas id="oshikatsuChart" class="chart"></canvas>
             <div class="chart-label">#私の<br>推し活<br>ポートフォリオ</div>
         </div>
-        <div class="speech-bubble">
-            推し活総額の38%<br>lifeistechに費やしました
+        <div class="speech-bubble" background-color="<% @portfolio.color %>">
+            推し活総額の<%= @portfolio.genre_percent %>%<br><%= @portfolio.genre %>に費やしました
         </div>
        
         <div class="photo-gallery">
             <div class="photo-container" id="photo1">
-                <img src="https://res.cloudinary.com/dknmmxgco/image/upload/v1724521977/tsdyfyaytsac1ezy9kze.png" alt="photo2">
-                <img src="https://res.cloudinary.com/dknmmxgco/image/upload/v1724521950/wngf8rwz6xyy3pvlnkcq.png" alt="photo1">
+                <% photo1 = @item.order(created_at: :desc).first %>
+                     <img src="<%= photo1.image_url %>" alt="<%= photo1.name %>" alt="photo1">
+        
             </div>
-            <button class="arrow left">&#10094;</button>
-            <button class="arrow right">&#10095;</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const oshiName = "lifeistech";
-        const oshiPercentage = 38;
-        const totalSpend = 1000; // Replace with database value
+        const oshiName = "<%= @portfolio.genre %>";
+        const oshiPercentage = "<%= @portfolio.genre_percent %>";
+        const totalSpend = "<%= @portfolio.total_price %>"; // Replace with database value
 
         // Pie Chart Setup
         const ctx = document.getElementById('oshikatsuChart').getContext('2d');
@@ -38,9 +37,9 @@
             data: {
                 labels: [`${oshiName}`, 'Others'],
                 datasets: [{
-                    label: 'Oshikatsu Portfolio',
+                    label: '%',
                     data: [oshiPercentage, 100 - oshiPercentage],
-                    backgroundColor: ['#00CFFF', '#E0E0E0']
+                    backgroundColor: ['<% @portfolio.color %>', '#E0E0E0']
                 }]
             },
             options: {
@@ -105,7 +104,7 @@ prevBtn.addEventListener('click', () => {
         
          // Set the speech bubble color
          // User-specified color for the speech bubble
-        const userColor = blue;
+        const userColor = "<% @portfolio.color %>";
         
         // Set the speech bubble color
         const speechBubble = document.getElementById('speechBubble');
@@ -113,5 +112,5 @@ prevBtn.addEventListener('click', () => {
         speechBubble.style.setProperty('--bubble-color', userColor);
     </script>
 </body>
-<a href="/<%= session[:user] %>" class="btn">もどる</a>
+<a href="/mypage/<%= session[:user] %>" class="btn">もどる</a>
 </html>

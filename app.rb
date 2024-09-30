@@ -23,6 +23,19 @@ before do
     config.api_key = ENV["CLOUDINARY_API_KEY"]
     config.api_secret = ENV["CLOUDINARY_API_SECRET"]
   end
+  
+  if session[:user].nil? && request.path != '/session_error' && request.path != '/' && request.path != '/signin' && request.path != '/signup' && request.path != '/signout' && !(request.path =~ %r{^/portfolio/\d+$})
+    redirect '/session_error' # ログインページへリダイレクト
+  end
+  
+end   
+
+get '/session_error' do
+    erb :session_error
+end
+
+not_found do
+  redirect "/mypage/#{session[:user]}"
 end
 
 get '/' do
@@ -40,7 +53,7 @@ post '/signup' do
     if user.persisted?
         session[:user] = user.id
     end
-    redirect "/#{session[:user]}"
+    redirect "/mypage/#{session[:user]}"
 end
 
 
@@ -49,7 +62,7 @@ post '/signin' do
     if user && user.authenticate(params[:password])
         session[:user] = user.id
     end
-  redirect "/#{session[:user]}"
+  redirect "/mypage/#{session[:user]}"
 end
 
 
@@ -73,14 +86,15 @@ post '/record' do
         img_url = upload['url']
     end
     # 商品の追加
-    item = Item.create(
+    Item.create(
+        user_id: session[:user],
         name: params[:name],
         image_url: img_url,
         price: params[:price].to_i,
         category: params[:category],
         genre: params[:genre])
   
-  redirect "/#{session[:user]}"
+  redirect "/mypage/#{session[:user]}"
 end
 
 get '/newpost' do
@@ -100,10 +114,11 @@ post '/newpost' do
         image_url: img_url,
         user_name: current_user.name,
         content: params[:content],
-        category: params[:category],
+        genre: params[:category],
         like: 0
     )
-    redirect "/#{session[:user]}"
+    p post
+    redirect '/timeline'
 end
 
 get '/timeline' do
@@ -112,45 +127,54 @@ get '/timeline' do
 end
 
 post '/newportfolio' do
-    @genre_of_portfolio = params[:genre]
     
-    @items = Item.all
-    @genre = @items.where(genre: @genre_of_portfolio)
+    allitems = Item.all
+    @items = Item.where(user: session[:user], genre: params[:genre])
+    @genre = params[:genre]
     
-    total_price = @items.sum(:price)
-    @genre_price = @genre.sum(:price)
+    @total_price = allitems.sum(:price)
+    @genre_price = @items.sum(:price)
     
-    @genre_parcent = @genre_price.to_f / @sum.to_f * 100.round(1)
-    
+    @genre_percent = ((@genre_price.to_f / @total_price.to_f) * 100).round(1).to_i
+    p "---------"
+    p @genre_percent
     erb:newportfolio
 end    
 
 
 post '/makeportfolio' do
-    # portfolio = Portfolio.create(
-    #     user: session[:user],
-    #     genre: @genre,
-    #     total_price: @sum,
-    #     genre_price: @sum,
-    #     item_id: @id,
-    #     post_id: @id
-    # )
-    p params[:color]
-    p params[:selected_image1]
-    p params[:selected_image2]
-
-    # session[:portfolio_data] = portfolio
-    # redirect "/portfolio/#{portfolio.id}"
-    redirect '/portfolio/id'
+    portfolio = Portfolio.create(
+        user_id: session[:user],
+        color: params[:color],
+        genre: params[:genre],
+        total_price: params[:total_price],
+        genre_price: params[:genre_price],
+        genre_percent: params[:genre_percent]
+    )
+    p portfolio
+    redirect "/portfolio/#{portfolio.id}"
 end
 
-get '/portfolio/id' do
-    #@portfolio = session.delete(:portfolio_data) || Portfolio.find(params[:id])
-    erb:portfoliodayo
+get '/portfolio/:id' do
+    @portfolio = Portfolio.find(params[:id])
+    p "================"
+    p @portfolio
+    p @portfolio.color
+    @item = Item.where(genre: @portfolio.genre)
+    @percent = 
+    
+    erb:portfolio
 end
 
-get '/:id' do
-    @items = Item.all
+get '/allitems' do
+    @items = Item.where(user_id: session[:user])
     @genre = @items.map{|item| item.genre}.uniq
+    erb:allitems 
+end
+
+get '/mypage/:id' do
+    @items = Item.where(user_id: session[:user])
+    @genre = @items.map{|item| item.genre}.uniq
+    @portfolios =Portfolio.where(user_id: session[:user])
     erb :mypage
 end

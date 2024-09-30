@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2024_08_03_085139) do
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
+    t.integer "user_id"
     t.string "name"
     t.string "image_url"
     t.integer "price"
@@ -26,12 +27,12 @@ ActiveRecord::Schema.define(version: 2024_08_03_085139) do
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.integer "user"
+    t.integer "user_id"
     t.string "genre"
     t.integer "total_price"
     t.integer "genre_price"
-    t.integer "item_id"
-    t.integer "post_id"
+    t.integer "genre_percent"
+    t.string "color"
   end
 
   create_table "posts", force: :cascade do |t|

@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規投稿</title>
+    <link rel="stylesheet" href="/css/post.css" type="text/css">
 </head>
 <body>
+    <div class="newpost-wrap main-view">
     <form action="/newpost" enctype="multipart/form-data" method="post">
-        <div>
+        <div class="drag-drop-info">
             <label for="image">写真</label>
-            <input id="file-input" type="file" multiple name="upload_photo" accept="image/*"></input>
+            <input class="drag-drop-buttons" id="file-input" type="file" multiple name="upload_photo" accept="image/*"></input>
         </div>
-        <div>
-            <input id="category" type="text" name="category" placeholder="#" required>
+        <div class="input-text">
+            <input id="genre" type="text" name="genre" placeholder="#" required>
         </div>
-        <div>
+        <div class="input-text">
             <textarea name="content" placeholder="投稿しよう"></textarea>
         </div>
         <button type="submit" id="share">シェアする</button>
     </form>
+    </div>
+    <a href="/timeline">もどる</a>
 </body>
 </html>

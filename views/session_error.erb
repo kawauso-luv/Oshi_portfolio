@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セッションエラー - 推し活ポートフォリオ</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+    
+        <h2>セッションが切れたため、お手数ですが再ログインをお願いします</h2>
+        <h2>数秒後にログインページに遷移します</h2>
+
+    <script>
+        // タイトルページにリダイレクト
+        function redirectToHome() {
+            window.location.href = '/signin'; // /indexにリダイレクト
+        }
+
+        // ページをロードした時にリダイレクトを実行する
+        window.onload = function() {
+            setTimeout(redirectToHome, 5000); // 5秒後に/indexにリダイレクト
+        };
+    </script>
+</body>
+</html>

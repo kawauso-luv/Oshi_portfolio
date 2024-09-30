@@ -38,11 +38,24 @@
                     </div>
                     <div class="form-actions">
                         <input type="submit" value="記録する!" class="btn submit-btn">
-                        <a href="/<%= session[:user] %>" class="btn back-btn">もどる</a>
+                        <a href="/mypage/<%= session[:user] %>" class="btn back-btn">もどる</a>
                     </div>
                 </form>
             </div>
         </main>
     </div>
+    <div class="loading-overlay">
+        <div class="loading-heart"></div>
+        <div class="loading-message">記録中...</div>
+    </div>
+    
+    
+    <script>
+    // フォームが送信された時にローディング画面を表示
+    document.querySelector('.record-form').addEventListener('submit', function(e) {
+        // ローディング画面を表示
+        document.querySelector('.loading-overlay').classList.add('active');
+    });
+    </script>
 </body>
 </html>

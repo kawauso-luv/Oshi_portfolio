@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規ポートフォリオ</title>
-    <link rel="stylesheet" href="/css/aaa.css">
+    <link rel="stylesheet" href="/css/newportfolio.css">
+    <style>
+        /* 追加: 画像選択時のスタイル */
+        .image-item.selected {
+            border: 2px solid blue; /* 選択された画像に青い枠線 */
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* 影を追加 */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <form action="/makeportfolio" method="post">
+        <form action="/makeportfolio" method="post" onsubmit="return validateSelection()">
             <div class="instructions">
-                <p>表示する写真を2枚選択</p>
+                <p>以下のデータがポートフォリオに登録されます</p>
             </div>
             <div class="image-flex">
                 <% if @items.nil? %>
@@ -27,43 +34,24 @@
                         </div>
                     <% end %>
                 <% end %>
-                </div>
-                <!-- Hidden Inputs for Selected Images -->
-                <input type="hidden" name="selected_image1" id="selected_image1">
-                <input type="hidden" name="selected_image2" id="selected_image2">
-                <br><br>
-                <div class="header">
+            </div>
+            <!-- Hidden Inputs for Selected Images -->
+            <input type="hidden" name="selected_image1" id="selected_image1">
+            <input type="hidden" name="selected_image2" id="selected_image2">
+            <br><br>
+            <div class="header">
                 <div class="color-picker">
                     <label for="color" class="p">推しカラーを選択<br></label>
                     <input type="color" name="color" value="#000000">
                 </div><br>
+                <input type="hidden" name="genre" value='<%= @genre %>'>
+                <input type="hidden" name="total_price" value='<%= @total_price %>'>
+                <input type="hidden" name="genre_price" value='<%= @genre_price %>'>
+                <input type="hidden" name="genre_percent" value='<%= @genre_percent %>'>
                 <button class="btn">ポートフォリオ作成！</button>
-                </div>
-            </form>
-        
-        <script>
-            document.querySelectorAll('.image-item').forEach(item => {
-                item.addEventListener('click', () => {
-                if (item.classList.contains('selected')) {
-                    item.classList.remove('selected');
-                    if (selectedImage1.value === item.getAttribute('data-value')) {
-                        selectedImage1.value = '';
-                    } else if (selectedImage2.value === item.getAttribute('data-value')) {
-                        selectedImage2.value = '';
-                    }
-                } else if (document.querySelectorAll('.selected').length < 2) {
-                    item.classList.add('selected');
-                    if (!selectedImage1.value) {
-                        selectedImage1.value = item.getAttribute('data-value');
-                    } else if (!selectedImage2.value) {
-                        selectedImage2.value = item.getAttribute('data-value');
-                    }
-                } else {
-                    alert('You can only select 2 images.');
-                }
-            });
-        });
-
-        </script>
+            </div>
+        </form>
+        <br><a href="/mypage/<%= session[:user] %>" class="btn back-btn">もどる</a>
+</script>
     </body>
 </html>
