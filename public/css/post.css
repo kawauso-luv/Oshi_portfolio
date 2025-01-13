@@ -1,59 +1,9 @@
-@font-face {
-  font-family: "billabong";
-  src: url("../fonts/FontsFree-Net-Billabong.ttf") format("truetype");
-}
-@font-face {
-  font-family: "noto-sans-jp";
-  src: url("../fonts/NotoSansJP-Thin.otf") format("opentype");
-  font-style: normal;
-  font-weight: 100;
-}
-@font-face {
-  font-family: "noto-sans-jp";
-  src: url("../fonts/NotoSansJP-Light.otf") format("opentype");
-  font-style: normal;
-  font-weight: 300;
-}
-@font-face {
-  font-family: "noto-sans-jp";
-  src: url("../fonts/NotoSansJP-Regular.otf") format("opentype");
-  font-style: normal;
-  font-weight: 400;
-}
-@font-face {
-  font-family: "noto-sans-jp";
-  src: url("../fonts/NotoSansJP-Medium.otf") format("opentype");
-  font-style: normal;
-  font-weight: 500;
-}
-@font-face {
-  font-family: "noto-sans-jp";
-  src: url("../fonts/NotoSansJP-Bold.otf") format("opentype");
-  font-style: normal;
-  font-weight: bold;
-}
-@font-face {
-  font-family: "noto-sans-jp";
-  src: url("../fonts/NotoSansJP-Black.otf") format("opentype");
-  font-style: normal;
-  font-weight: 900;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap');
 
 
 body {
   color: #222;
-  font-family: "noto-sans-jp";
-}
-
-header {
-  display: flex;
-  align-items: center;
-  height: 64px;
-  padding: 0 30px;
-  border-bottom: 1px solid #DBDBDB;
-  background-color: #ffffff;
+  font-family: "Kaisei Decol";
 }
 
 a {
@@ -86,20 +36,19 @@ a::after {
     content: '';
 }
 
-.return a {
-    left:40px; 
-    top:30px;
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #ff809d;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.header-logo {
-  width: 20vw;
-}
 
-.header-logo p {
-  margin-bottom: -3px;
-  font-family: "billabong";
-  font-size: 32px;
-}
 
 @media screen and (max-width: 768px) {
   .header-logo {
@@ -139,62 +88,6 @@ main {
   padding: 30px;
   border-right: 1px solid #DBDBDB;
   background-color: #ffffff;
-}
-
-.sidebar a {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  margin-bottom: 40px;
-}
-
-.sidebar img {
-  width: 24px;
-  height: 24px;
-  margin-right: 16px;
-}
-
-.sidebar p {
-  font-size: 16px;
-  font-weight: normal;
-}
-
-.sidebar .bold-text {
-  font-weight: bold;
-}
-
-.sidebar .normal-text {
-  font-weight: normal;
-}
-
-@media screen and (max-width: 768px) {
-  .sidebar {
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    padding: 0;
-    height: 48px;
-    border-top: 1px solid #DBDBDB;
-  }
-
-  .sidebar ul {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100%;
-  }
-
-  .sidebar a {
-    margin: 0;
-  }
-
-  .sidebar a img {
-    margin: 0;
-  }
-
-  .sidebar a p {
-    display: none;
-  }
 }
 
 .main-view {
@@ -328,6 +221,7 @@ main {
   opacity: 1;
   pointer-events: all;
 }
+
 
 .options {
   position: absolute;
