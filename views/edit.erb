@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>編集 - 推し活ポートフォリオ</title>
+    <link rel="stylesheet" href="/css/mypage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>推し活ポートフォリオ</h1>
+        </header>
+        <main>
+            <div class="record-form-container">
+                <h2>グッズを記録する</h2>
+                <form action="/edit/<%= @item.id %>" enctype="multipart/form-data" method="post" class="record-form">
+                    <div class="form-group">
+                        <label for="name">買ったもの</label>
+                        <input id="name" type="text" name="name" value="<%= @item.name %>" placeholder="商品名を入力" required>
+                    </div>
+                    <!-- 既存画像のプレビュー -->
+                    <label for="current_image">現在の画像:</label>
+                    <% if @item.image_url %>
+                        <div>
+                            <img src="<%= @item.image_url %>" alt="現在の画像" style="max-width: 200px;">
+                        </div>
+                    <!-- 既存の画像URLをhiddenフィールドで送信 -->
+                        <input type="hidden" name="current_image_url" value="<%= @item.image_url %>">
+                    <% else %>
+                        <p>画像は登録されていません。</p>
+                    <% end %>
+
+                    <!-- 新しい画像のアップロード -->
+                    <label for="image">新しい画像をアップロード:</label>
+                    <input type="file" name="image" id="image">
+                    
+                    <div class="form-group">
+                        <label for="price">プライス</label>
+                        <input id="price" type="number" name="price" value="<%= @item.price %>" placeholder="￥" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">カテゴリ</label>
+                        <input id="category" type="text" name="category" value="<%= @item.category %>" placeholder="例) アクリルスタンド" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">ジャンル</label>
+                        <input id="genre" type="text" name="genre" value="<%= @item.genre %>" placeholder="例) 山田一郎" required>
+                    </div>
+                    <input type="hidden" name="id" value="<%=@item.id%>">
+                    <div class="form-actions">
+                        <input type="submit" value="更新する!" class="btn submit-btn">
+                        <a href="/mypage/<%= session[:user] %>" class="btn back-btn">もどる</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <div class="loading-overlay">
+        <div class="loading-heart"></div>
+        <div class="loading-message">更新中...</div>
+    </div>
+    
+    
+    <script>
+    // フォームが送信された時にローディング画面を表示
+    document.querySelector('.record-form').addEventListener('submit', function(e) {
+        // ローディング画面を表示
+        document.querySelector('.loading-overlay').classList.add('active');
+    });
+    </script>
+</body>
+</html>

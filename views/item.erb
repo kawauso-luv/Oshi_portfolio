@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= @item.name %> - 推し活ポートフォリオ</title>
+    <link rel="stylesheet" href="/css/mypage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>推し活ポートフォリオ</h1>
+            <form action="/mypage" method="get">
+                <button class="logout-btn">もどる</button>
+            </form>
+        </header>
+    </div>    
+        <main>
+            <div class="container">
+                <img src="<%= @item.image_url %>" alt="<%= @item.name %>">
+                <p class="item-name"><%= @item.name %></p>
+                <p class="item-category">#<%= @item.category%></p>
+                <p class="item-price">¥<%= @item.price %></p>
+                
+                <form action="/edit/<%= @item.id %>" method="get">
+                    <button class="logout-btn">編集</button>
+                </form>
+                <br>
+                <form action="/delete/<%= @item.id %>" method="post" onsubmit="return confirm('削除しますか？')">
+                    <button class="logout-btn">削除</button>
+                </form>
+            </div>
+            
+        </main>
+    
+</body>
+</html>

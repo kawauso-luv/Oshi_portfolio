@@ -22,6 +22,7 @@ before do
     config.cloud_name = ENV["CLOUD_NAME"]
     config.api_key = ENV["CLOUDINARY_API_KEY"]
     config.api_secret = ENV["CLOUDINARY_API_SECRET"]
+    config.secure = true
   end
   
   if session[:user].nil? && request.path != '/session_error' && request.path != '/' && request.path != '/signin' && request.path != '/signup' && request.path != '/signout' && !(request.path =~ %r{^/portfolio/\d+$})
@@ -97,6 +98,47 @@ post '/record' do
   redirect "/mypage/#{session[:user]}"
 end
 
+get '/item/:id' do
+    @item = Item.find(params[:id])
+    erb:item
+end
+
+get '/edit/:id' do
+    @item = Item.find(params[:id])
+    erb :edit
+end
+
+post '/edit/:id' do
+    item = Item.find(params[:id])
+
+  # params[:image]が空の場合は、既存のURLを使用
+  img_url = params[:current_image_url]
+  if params[:image]
+    image = params[:image]
+    tempfile = image[:tempfile]
+    upload = Cloudinary::Uploader.upload(tempfile.path)
+    img_url = upload['url']
+  end
+
+  # 商品の更新
+  item.update(
+    user_id: session[:user],
+    name: params[:name],
+    image_url: img_url,
+    price: params[:price].to_i,
+    category: params[:category],
+    genre: params[:genre]
+  )
+
+  redirect "/mypage/#{session[:user]}"
+end
+
+post '/delete/:id' do
+    item = Item.find(params[:id])
+    item.destroy
+    redirect "/mypage/#{session[:user]}"
+end
+
 get '/newpost' do
     erb :post
 end
@@ -107,8 +149,6 @@ post '/newpost' do
         tempfile = image[:tempfile]
         upload = Cloudinary::Uploader.upload(tempfile.path)
         img_url = upload['url']
-    else
-        img_url = null
     end  
     post = Post.create(
         image_url: img_url,
@@ -161,9 +201,15 @@ get '/portfolio/:id' do
     p @portfolio
     p @portfolio.color
     @item = Item.where(genre: @portfolio.genre)
-    @percent = 
     
     erb:portfolio
+end
+
+post '/delete/portfolio/:id' do
+    portfolio = Portfolio.find(params[:id])
+    p "-------------------------------!!!"
+    portfolio.destroy
+    redirect "/mypage/#{session[:user]}"
 end
 
 get '/allitems' do

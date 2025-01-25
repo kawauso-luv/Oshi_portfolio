@@ -8,10 +8,11 @@
 </head>
 <body>
     <div class="main-view">
-    <form action="/newpost" enctype="multipart/form-data" method="post">
+    <form action="/newpost" enctype="multipart/form-data" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         <div class="drag-drop-info">
             <label for="image">写真</label>
-            <input class="drag-drop-buttons" id="file-input" type="file" multiple name="upload_photo" accept="image/*"></input>
+            <input type="file" name="upload_photo" id="image" required>
+            <p id="error-message" style="color: red; display: none;">写真を添付してください。</p>
         </div>
         <div class="input-text">
             <input id="genre" type="text" name="genre" placeholder="#" required>
@@ -19,9 +20,26 @@
         <div class="input-text">
             <textarea name="content" placeholder="投稿しよう"></textarea>
         </div>
-        <button type="submit" id="share">シェアする</button>
+        <br>
+        <button type="submit" id="share" class="btn">シェアする</button>
     </form>
     </div>
     <a href="/timeline">もどる</a>
 </body>
+
+<script>
+  function validateForm() {
+  const fileInput = document.getElementById("image");
+  const errorMessage = document.getElementById("error-message");
+
+  if (!fileInput.files.length) { // ファイルが選択されているか確認
+    errorMessage.style.display = "block";
+    return false; // 送信をキャンセル
+  }
+
+  errorMessage.style.display = "none";
+  return true; // 送信許可
+}
+</script>
+
 </html>

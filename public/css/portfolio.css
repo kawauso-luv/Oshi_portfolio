@@ -24,6 +24,11 @@
     font-weight: bold;
     transition: background-color 0.3s ease;
     }
+    
+    .btn2 {
+    right:240px;
+    background-color: #000;
+    }
 
     .btn:hover {
     background-color: #ff4d76;

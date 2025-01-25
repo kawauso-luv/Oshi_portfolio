@@ -12,9 +12,6 @@
             <canvas id="oshikatsuChart" class="chart"></canvas>
             <div class="chart-label">#私の<br>推し活<br>ポートフォリオ</div>
         </div>
-        <div class="speech-bubble" background-color="<% @portfolio.color %>">
-            推し活総額の<%= @portfolio.genre_percent %>%<br><%= @portfolio.genre %>に費やしました
-        </div>
        
         <div class="photo-gallery">
             <div class="photo-container" id="photo1">
@@ -22,6 +19,9 @@
                      <img src="<%= photo1.image_url %>" alt="<%= photo1.name %>" alt="photo1">
         
             </div>
+        </div>
+        <div class="speech-bubble" background-color="<% @portfolio.color %>">
+            推し活総額の<%= @portfolio.genre_percent %>%<br><%= @portfolio.genre %>に費やしました
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,7 +39,7 @@
                 datasets: [{
                     label: '%',
                     data: [oshiPercentage, 100 - oshiPercentage],
-                    backgroundColor: ['<% @portfolio.color %>', '#E0E0E0']
+                    backgroundColor: ['<%= @portfolio.color %>', '#E0E0E0']
                 }]
             },
             options: {
@@ -113,4 +113,7 @@ prevBtn.addEventListener('click', () => {
     </script>
 </body>
 <a href="/mypage/<%= session[:user] %>" class="btn">もどる</a>
+<form action="/delete/portfolio/<%= @portfolio.id %>" method="post" onsubmit="return confirm('削除しますか？')">
+    <button class="btn btn2">削除</button>
+</form>
 </html>
