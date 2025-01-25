@@ -114,6 +114,6 @@ prevBtn.addEventListener('click', () => {
 </body>
 <a href="/mypage/<%= session[:user] %>" class="btn">もどる</a>
 <form action="/delete/portfolio/<%= @portfolio.id %>" method="post" onsubmit="return confirm('削除しますか？')">
-    <button class="btn btn2">削除</button>
+    <button class="btn2">削除</button>
 </form>
 </html>

@@ -1,11 +1,12 @@
 /* 全体の背景とフォント */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f0f2f5, #d9e2ef);
+    background: linear-gradient(135deg, #d9e2ef);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #ffe2e9
 }
 
 /*ボタン*/

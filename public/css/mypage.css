@@ -9,6 +9,14 @@ body {
     color: #333;
 }
 
+a {
+    text-decoration: none; /* 下線を無効化 */
+    color:#ff4d76;
+}
+a:hover {
+  cursor: default; /* マウスホバー時、通常時の矢印(➚)の形にする */
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

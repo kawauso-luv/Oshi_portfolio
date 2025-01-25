@@ -2,7 +2,7 @@
 
     body {
         font-family: 'Poppins', Arial, sans-serif;
-        background-color: #f0f4f8;
+        background-color: #ffe2e9;
         color: #333;
         display: flex;
         justify-content: center;
@@ -26,8 +26,17 @@
     }
     
     .btn2 {
-    right:240px;
+    position:fixed; /*配置設定-fixed指定で追従*/
+    z-index:1; 
+    left:120px;
+    bottom:20px;
+    padding: 12px 30px;
     background-color: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
     }
 
     .btn:hover {
