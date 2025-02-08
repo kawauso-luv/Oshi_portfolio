@@ -10,6 +10,9 @@ require 'cloudinary/uploader'
 require 'cloudinary/utils'
 require 'dotenv/load'
 
+set :views, File.dirname(__FILE__) + '/views'
+set :public_folder, File.dirname(__FILE__) + '/public'
+
 helpers do
     def current_user
         User.find_by(id: session[:user])

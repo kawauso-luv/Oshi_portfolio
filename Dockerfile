@@ -1,5 +1,5 @@
 # ベースイメージ
-FROM ruby:3.1
+FROM ruby:3.3
 
 # 作業ディレクトリの設定
 WORKDIR /app

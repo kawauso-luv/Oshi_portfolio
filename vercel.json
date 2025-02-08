@@ -1,9 +1,16 @@
 {
     "version": 2,
     "builds": [
-      { "src": "app.rb", "use": "@vercel/ruby" }
+      {
+        "src": "config.ru",
+        "use": "@vercel/ruby"
+      }
     ],
     "rewrites": [
-    { "source": "/(.*)", "destination": "/app.rb" }
+      {
+        "source": "/(.*)",
+        "destination": "/config.ru"
+      }
     ]
   }
+  
