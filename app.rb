@@ -151,6 +151,7 @@ post '/newpost' do
         img_url = upload['url']
     end  
     post = Post.create(
+        user_id: session[:user],
         image_url: img_url,
         user_name: current_user.name,
         content: params[:content],
@@ -164,6 +165,13 @@ end
 get '/timeline' do
     @posts = Post.order(created_at: :desc)
     erb :timeline
+end
+
+get '/timeline/:id' do
+    @user = User.find(params[:id])
+    @posts = @user.posts
+    @is_owner = (session[:user_id] == @user.id)  # 自分のページか判定
+    erb :sns_mypage
 end
 
 post '/newportfolio' do

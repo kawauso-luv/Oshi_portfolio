@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2024_08_03_085139) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
     t.string "image_url"
     t.string "user_name"
     t.text "genre"

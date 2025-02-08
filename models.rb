@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     has_secure_password
     has_many :portfolios
     has_many :items
+    has_many :posts
 end
 
 
@@ -18,6 +19,7 @@ end
 
 class Post < ActiveRecord::Base
     belongs_to :portfolio
+    belongs_to :user
 end
 
 
