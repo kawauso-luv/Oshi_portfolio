@@ -11,4 +11,4 @@ COPY . .
 RUN bundle install
 
 # Sinatraを起動するためのコマンド
-CMD ["ruby", "app.rb", "-o", "0.0.0.0"]
+CMD ["rackup","--host","0.0.0..0","--port","8080"]
