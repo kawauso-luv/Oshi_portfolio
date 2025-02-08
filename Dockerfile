@@ -1,5 +1,7 @@
 # ベースイメージ
 FROM ruby:3.3
+RUN apt-get update && apt-get install -y libpq-dev
+
 
 # 作業ディレクトリの設定
 WORKDIR /app
