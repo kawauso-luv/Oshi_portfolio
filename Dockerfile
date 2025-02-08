@@ -5,6 +5,8 @@ FROM ruby:3.1
 WORKDIR /app
 
 # 必要なファイルをコピー
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
 COPY . .
 
 # Bundlerのインストールと依存関係の解決
