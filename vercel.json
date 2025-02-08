@@ -1,9 +1,9 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "Dockerfile",
-        "use": "@vercel/docker"
-      }
+      { "src": "app.rb", "use": "@vercel/ruby" }
+    ],
+    "rewrites": [
+    { "source": "/(.*)", "destination": "/app.rb" }
     ]
   }
