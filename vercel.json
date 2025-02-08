@@ -11,6 +11,7 @@
         "source": "/(.*)",
         "destination": "/config.ru"
       }
-    ]
+    ],
+    "buildCommand": "./build.sh"
   }
   
