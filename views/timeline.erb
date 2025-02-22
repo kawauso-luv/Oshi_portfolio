@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="/css/post.css" type="text/css">
 </head>
 <body>
-  <form action="/mypage/<% session[:user] %>" method="post">
+  <form action="/mypage/<%= session[:user] %>" method="post" class="sns-navi">
     <button class="logout-btn">マイページへ</button>
+  </form> 
+  <form action="/timeline/<%= session[:user] %>" method="get" class="sns-navi">
+    <button class="logout-btn">自分の投稿</button>
   </form> 
   <div class="main-view">
     <%# 投稿がない時 %>

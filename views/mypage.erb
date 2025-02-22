@@ -27,13 +27,27 @@
             <div class="portfolio-section">
                 <h2>ポートフォリオをつくるジャンルの選択</h2>
                 <form action="/newportfolio" method="post" class="genre-form">
-                    <select name="genre">
-                        <option value="">どのジャンルのポートフォリオをつくりますか</option>
+                    <% if @genre.empty? %>
+                        <p>まだジャンルが登録されていません。「推し活を記録する」から登録してみよう！</p>
+                    <% else %>
+                        <select name="genre" id="genre-select">
                         <% @genre.each do |genre| %>
                             <option value="<%= genre %>"><%= genre %></option>
                         <% end %>
-                    </select>
-                    <button type="submit" class="btn">ポートフォリオをつくる</button>
+                        </select>
+                        <button type="submit" class="btn" id="submit-btn" disabled>ポートフォリオをつくる</button>
+                    
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const genreSelect = document.getElementById("genre-select");
+                                const submitBtn = document.getElementById("submit-btn");
+                    
+                                genreSelect.addEventListener("change", function() {
+                                    submitBtn.disabled = !genreSelect.value;
+                                });
+                            });
+                        </script>
+                    <% end %>
                 </form>
             </div>
             

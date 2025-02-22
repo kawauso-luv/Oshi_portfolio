@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タイムライン</title>
+    <title><%= @user.name %>の投稿一覧</title>
     <link rel="stylesheet" href="/css/post.css" type="text/css">
 </head>
 <body>
-<form action="/mypage/<% session[:user] %>" method="post">
-    <button class="logout-btn">マイページへ</button>
+<form action="/timeline"method="get">
+    <button class="logout-btn">タイムラインへ</button>
 </form> 
 
-<h2><%= @user.name %> のマイページ</h2>
-
-<h3>投稿一覧</h3>
+<h2 style="text-align: center"><%= @user.name %>の投稿一覧</h2>
 <div class="main-view">
     <%# 投稿がない時 %>
     <% if @posts.empty? %>

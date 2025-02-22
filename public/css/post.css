@@ -93,6 +93,11 @@ main {
   }
 }
 
+.sns-navi{
+  width:200px;
+  display: inline-flex;
+}
+
 .sidebar {
   min-width: 200px;
   width: 13vw;
@@ -139,7 +144,7 @@ main {
   padding-bottom: 10px;
   border-bottom: 1px solid #DBDBDB;
   background-color: #ffffff;
-  border-left: 3px solid #ff809d;
+  
 }
 
 .post:last-child{

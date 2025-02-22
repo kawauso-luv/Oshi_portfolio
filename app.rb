@@ -39,6 +39,10 @@ not_found do
   redirect "/mypage/#{session[:user]}"
 end
 
+error do
+    redirect "/mypage/#{session[:user]}"
+end
+
 get '/' do
     erb :index
 end
@@ -175,7 +179,6 @@ get '/timeline/:id' do
 end
 
 post '/newportfolio' do
-    
     allitems = Item.all
     @items = Item.where(user: session[:user], genre: params[:genre])
     @genre = params[:genre]
